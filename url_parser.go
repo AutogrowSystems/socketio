@@ -24,7 +24,7 @@ func newURLParser(raw string) (*urlParser, error) {
 }
 
 func (u *urlParser) handshake() string {
-	return fmt.Sprintf("%s/socket.io/1", u.parsed.String())
+	return fmt.Sprintf("%s/socket.io/1/?EIO=2&transport=polling&t=1446710999349", u.parsed.String())
 }
 
 func (u *urlParser) websocket(sessionId string) string {
@@ -34,5 +34,5 @@ func (u *urlParser) websocket(sessionId string) string {
 	} else {
 		host = strings.Replace(u.parsed.String(), "http://", "ws://", 1)
 	}
-	return fmt.Sprintf("%s/socket.io/1/websocket/%s", host, sessionId)
+	return fmt.Sprintf("%s/socket.io/1/websocket/?EIO=2&transport=websocket&sid=%s", host, sessionId)
 }

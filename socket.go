@@ -4,6 +4,7 @@ package socketio
 
 import (
 	"time"
+	"log"
 )
 
 type Socket struct {
@@ -31,6 +32,7 @@ func DialAndConnect(url string, channel string, query string) (*Socket, error) {
 // the implemented and supported Transports.
 func Dial(url string) (*Socket, error) {
 	session, err := NewSession(url)
+
 	if err != nil {
 		return nil, err
 	}
@@ -40,11 +42,13 @@ func Dial(url string) (*Socket, error) {
 		return nil, err
 	}
 
+	log.Println(transport)
+	log.Println(session)
 	// Heartbeat goroutine
 	go func() {
 		heartbeatMsg := NewHeartbeat()
 		for {
-			time.Sleep(session.HeartbeatTimeout - time.Second)
+			time.Sleep(session.HeartbeatTimeout - 3*time.Second)
 			err := transport.Send(heartbeatMsg.String())
 			if err != nil {
 				return
