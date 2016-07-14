@@ -1,8 +1,8 @@
 package socketio
 
 import (
-	"code.google.com/p/go.net/websocket"
 	"errors"
+	"golang.org/x/net/websocket"
 	"io"
 	"time"
 )
