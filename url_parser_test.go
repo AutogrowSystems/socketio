@@ -32,27 +32,27 @@ func testWebsocketUrls(t *testing.T, rawUrls []string, expected string) {
 func TestHandshakeUrl(t *testing.T) {
 	testHandshakeUrls(t,
 		[]string{"server.com", "http://server.com"},
-		"http://server.com/socket.io/1")
+		"http://server.com/socket.io/1/?EIO=2&transport=polling&t=1446710999349")
 
 	testHandshakeUrls(t,
 		[]string{"server.com/path", "http://server.com/path"},
-		"http://server.com/path/socket.io/1")
+		"http://server.com/path/socket.io/1/?EIO=2&transport=polling&t=1446710999349")
 
 	testHandshakeUrls(t,
 		[]string{"https://server.com"},
-		"https://server.com/socket.io/1")
+		"https://server.com/socket.io/1/?EIO=2&transport=polling&t=1446710999349")
 }
 
 func TestWebsocketUrl(t *testing.T) {
 	testWebsocketUrls(t,
 		[]string{"server.com", "http://server.com"},
-		"ws://server.com/socket.io/1/websocket/session_id")
+		"ws://server.com/socket.io/1/websocket/?EIO=2&transport=websocket&sid=session_id")
 
 	testWebsocketUrls(t,
 		[]string{"server.com/path", "http://server.com/path"},
-		"ws://server.com/path/socket.io/1/websocket/session_id")
+		"ws://server.com/path/socket.io/1/websocket/?EIO=2&transport=websocket&sid=session_id")
 
 	testWebsocketUrls(t,
 		[]string{"https://server.com"},
-		"wss://server.com/socket.io/1/websocket/session_id")
+		"wss://server.com/socket.io/1/websocket/?EIO=2&transport=websocket&sid=session_id")
 }
